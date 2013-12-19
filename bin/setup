@@ -1,0 +1,6 @@
+#!/bin/bash -eu
+
+export PATH=/opt/rh/ruby193/root/bin:$PATH
+export LD_LIBRARY_PATH=/opt/rh/ruby193/root/usr/lib64
+mkdir $OPENSHIFT_PAPERTRAILAPP_DIR/logs
+cd $OPENSHIFT_PAPERTRAILAPP_DIR && bundle install

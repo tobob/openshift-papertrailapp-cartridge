@@ -1,0 +1,77 @@
+#!/bin/bash -e
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+cartridge_type="papertrailapp"
+
+function start() {
+	echo "Starting $cartridge_type cart"
+	export PATH=/opt/rh/ruby193/root/bin:$PATH
+	export LD_LIBRARY_PATH=/opt/rh/ruby193/root/usr/lib64
+	if [ ! $PAPERTRAIL_PORT ]; then
+		client_result "Missing PAPERTRAILAPP_PORT environment variable."
+		client_result "Please create using:"
+		client_result "rhc set-env PAPERTRAILAPP_PORT=12345 -a $OPENSHIFT_APP_NAME"
+		client_result "Where 12345 is YOUR papertrailapp port"
+		exit 0
+	fi
+	
+  
+}
+
+
+function stop() {
+  echo "Stopping $cartridge_type cart"
+
+  if isrunning; then
+    if [ -f "$WILDFLY_PID_FILE" ]; then
+      pid=$(cat $WILDFLY_PID_FILE);
+      echo "Sending SIGTERM to wildfly:$pid ..." 1>&2
+      killtree $pid
+    else
+      echo "Failed to locate Wildfly PID File" 1>&2
+    fi
+  fi
+}
+
+function restart() {
+    echo "Restarting $cartridge_type cart"
+
+    stop
+
+    start
+}
+
+function status() {
+   if isrunning
+   then
+      client_result "Application is running"
+   else
+      client_result "Application is either stopped or inaccessible"
+   fi
+}
+
+function reload() {
+    echo "Reloading $cartridge_type cart"
+    restart
+}
+
+# Clean up any log files
+function tidy() {
+  client_message "Emptying log dir: $OPENSHIFT_WILDFLY_LOG_DIR"
+  shopt -s dotglob
+  rm -rf $OPENSHIFT_PAPERTRAILAPP_LOG_DIR/*
+}
+
+case "$1" in
+  build)           build ;;
+  deploy)          deploy ;;
+  start)           start ;;
+  stop)            stop ;;
+  restart)         restart ;;
+  status)          status ;;
+  reload)          reload ;;
+  tidy)            tidy ;;
+  *)               exit 0
+esac
+

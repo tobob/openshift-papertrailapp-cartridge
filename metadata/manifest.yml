@@ -1,0 +1,25 @@
+Name: papertrailapp
+Cartridge-Short-Name: PAPERTRAILAPP
+Display-Name: Papertrailapp
+Description: "Frustration-free log management. Get started in seconds."
+License: LGPL
+License-Url: http://www.gnu.org/copyleft/lesser.txt
+Vendor: papertrail
+Cartridge-Version: '0.0.1'
+Cartridge-Vendor: papertrailapp
+Source-Url: https://github.com/developercorey/openshift-papertrail-cartridge.git
+Categories:
+  - service
+  - papertrailapp
+Website: http://www.papertrailapp.com
+Help-Topics:
+  "Developer Center": https://www.openshift.com/developers
+Cart-Data:
+  - Key: OPENSHIFT_PAPERTRAILAPP_LOG_DIR
+    Type: environment
+    Description: "Directory to store application log files."
+Provides:
+  - papertrailapp
+Scaling:
+  Min: 1
+  Max: -1
