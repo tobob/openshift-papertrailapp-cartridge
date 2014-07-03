@@ -43,7 +43,7 @@ function start() {
 			fi
 		done
 		echo "destination:" >> $OPENSHIFT_PAPERTRAILAPP_DIR/log_files.yml
-		echo "  host: 67.214.212.105 " >> $OPENSHIFT_PAPERTRAILAPP_DIR/log_files.yml
+		echo "  host: $PAPERTRAILAPP_HOST" >> $OPENSHIFT_PAPERTRAILAPP_DIR/log_files.yml
 		echo "  port: $PAPERTRAILAPP_PORT" >> $OPENSHIFT_PAPERTRAILAPP_DIR/log_files.yml
 		cd $OPENSHIFT_PAPERTRAILAPP_DIR 
 		bundle exec remote_syslog -c $OPENSHIFT_PAPERTRAILAPP_DIR/log_files.yml --hostname ${OPENSHIFT_APP_DNS} -D --tcp --tls >> $OPENSHIFT_PAPERTRAILAPP_DIR/logs/papertrailapp.log 2>&1 &
