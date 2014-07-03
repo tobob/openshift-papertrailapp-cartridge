@@ -5,7 +5,7 @@ openshift-papertrailapp-cartridge
 
 Add an environment variable for your papertrailapp port number:
 
-    rhc set-env PAPERTRAILAPP_PORT=<port> -a <appname>
+    rhc set-env PAPERTRAILAPP_PORT=<port> PAPERTRAILAPP_HOST=<host_as_ip_address> -a <appname>
 
 Where <port> is your papertrailapp port number, and <appname> is the name of your application.
 Then restart your application
