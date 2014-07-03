@@ -8,7 +8,7 @@ License-Url: http://www.gnu.org/copyleft/lesser.txt
 Vendor: papertrail
 Cartridge-Version: 0.0.1
 Cartridge-Vendor: papertrailapp
-Source-Url: https://github.com/developercorey/openshift-papertrailapp-cartridge.git
+Source-Url: https://github.com/openshift-cartridges/openshift-papertrailapp-cartridge.git
 Categories:
 - service
 - embedded
